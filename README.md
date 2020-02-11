@@ -2,9 +2,9 @@
 
 eMJPM editor example app,
 
-1. user sign in to editor application
-2. user click eMJPM authorization link
-* if not logged in to eMJPM, user invited to sign in with credentials
+* user sign in to editor application
+* user click eMJPM authorization link
+* if not logged in to eMJPM, user is invited to sign in with credentials
 * user is redirected to editor application with token as url parameter
 
 Authorization link is built with following parameters :
