@@ -1,27 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import queryString from 'query-string';
-
-import './App.css';
-
-const editorId = process.env.REACT_APP_EMJPM_EDITOR_ID || 1;
-const editorSecret = process.env.REACT_APP_EMJPM_EDITOR_SECRET || "c1uhbrbyr7d";
-const redirectUrl = process.env.REACT_APP_EMJPM_REDIRECT_URL || "http://localhost:3001";
-const emjpmUrl = process.env.REACT_APP_EMJPM_URL || "https://emjpm.num.social.gouv.fr";
-const emjpmAuthQueryString = queryString.stringify({
-  editor_id: editorId,
-  editor_secret: editorSecret,
-  redirect_url: redirectUrl
-});
-const emjpmAuthUrl = `${emjpmUrl}/application/authorization?${emjpmAuthQueryString}`;
-const emjpmApiUrl = process.env.REACT_API_EMJPM_URL || "http://localhost:4000/api/v2";
-const emjpmApiMesuresUrl = `${emjpmApiUrl}/editors/mesures`;
+import React, { useEffect, useState } from "react";
+import queryString from "query-string";
+import { useFormik } from "formik";
+import { Box, Flex, Heading } from "rebass";
+import {
+  BoxWrapper,
+  Input,
+  Button,
+  Card,
+  Text
+} from "@socialgouv/emjpm-ui-core";
+import { MesureListItem } from "@socialgouv/emjpm-ui-components";
+const emjpmApiUrl =
+  process.env.REACT_API_EMJPM_URL ||
+  "https://api-v25-21-0-emjpm.dev.fabrique.social.gouv.fr/api/v2";
+const emjpmApiMesuresUrl = `${emjpmApiUrl}/editors/mesures?status=Mesure en cours`;
 
 function App() {
   const [token, setToken] = useState(null);
   const [mesures, setMesures] = useState(null);
 
+  const formik = useFormik({
+    initialValues: {
+      editorSecret: "g5vg4muu46s",
+      editorId: "1",
+      redirectUrl: "http://localhost:3001",
+      appUrl: "https://v25-21-0-emjpm.dev.fabrique.social.gouv.fr"
+    },
+    onSubmit: values => {
+      const emjpmAuthQueryString = queryString.stringify({
+        editor_id: values.editorId,
+        editor_secret: values.editorSecret,
+        redirect_url: values.redirectUrl
+      });
+      const emjpmAuthUrl = `${values.appUrl}/application/authorization?${emjpmAuthQueryString}`;
+      window.location.replace(emjpmAuthUrl);
+    }
+  });
+
   useEffect(() => {
-    const localToken = localStorage.getItem('token')
+    const localToken = localStorage.getItem("token");
 
     if (localToken) {
       setToken(localToken);
@@ -31,7 +48,7 @@ function App() {
     const newToken = queryString.parse(window.location.search).token;
 
     if (newToken) {
-      localStorage.setItem('token', newToken);
+      localStorage.setItem("token", newToken);
       window.location.replace(window.location.origin);
     }
   }, [setToken]);
@@ -47,37 +64,94 @@ function App() {
           Authorization: `Bearer ${token}`
         }
       });
-
       const { mesures } = await res.json();
-
       setMesures(mesures);
     };
 
     fetchMesures();
   }, [token]);
-
   return (
-    <div className="App">
-      <h1>eMJPM - Application métier</h1>
-      {token ? (
-        <code styles={{ o: "80%"}}>{token}</code>
-      ) : (
-        <a href={emjpmAuthUrl} className="button">
-          Connexion eMJPM
-        </a>
-      )}
-      {mesures && (
-        <div>
-          <h4>Mesures</h4>
-          {mesures.map(mesure => (
-            <div key={mesure.id}>
-              <span>#{mesure.id} - {mesure.ville}</span>
-              <span>{mesure.ville}</span>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+    <Box bg="#f2f5f9">
+      <BoxWrapper mt={6} px={2}>
+        <Heading mb="5">eMJPM - Application métier - api test</Heading>
+        {token ? (
+          <Box>
+            <Heading mb="2">Token utilisateur</Heading>
+            <Card sx={{ overflow: "scroll", bg: "white" }}>
+              <pre>
+                <code width="80%">{token}</code>
+              </pre>
+            </Card>
+            <Button
+              mt="2"
+              onClick={() => {
+                setToken(null);
+                setMesures(null);
+                localStorage.removeItem("token");
+              }}
+            >
+              Supprimer le token utilisateur
+            </Button>
+          </Box>
+        ) : (
+          <Box>
+            <form onSubmit={formik.handleSubmit}>
+              <Box mb="2">
+                <Input
+                  id="editorSecret"
+                  name="editorSecret"
+                  type="text"
+                  placeholder="Editor secret"
+                  onChange={formik.handleChange}
+                  value={formik.values.editorSecret}
+                />
+              </Box>
+              <Box mb="2">
+                <Input
+                  id="editorId"
+                  name="editorId"
+                  type="text"
+                  placeholder="Editor id"
+                  onChange={formik.handleChange}
+                  value={formik.values.editorId}
+                />
+              </Box>
+              <Box mb="2">
+                <Input
+                  id="appUrl"
+                  name="appUrl"
+                  type="text"
+                  placeholder="Url de l'app de démo (default: https://v25-21-0-emjpm.dev.fabrique.social.gouv.fr)"
+                  onChange={formik.handleChange}
+                  value={formik.values.url}
+                />
+              </Box>
+              <Box mb="2">
+                <Input
+                  id="redirectUrl"
+                  name="redirectUrl"
+                  type="text"
+                  placeholder="Url de redirection (default: http://localhost:3001)"
+                  onChange={formik.handleChange}
+                  value={formik.values.url}
+                />
+              </Box>
+              <Button type="submit">Connexion eMJPM</Button>
+            </form>
+          </Box>
+        )}
+        {mesures && (
+          <Box mt="6">
+            <Heading mb="5">Mesures</Heading>
+            {mesures.map(mesure => (
+              <Flex key={mesure.id}>
+                <MesureListItem mesure={mesures} />
+              </Flex>
+            ))}
+          </Box>
+        )}
+      </BoxWrapper>
+    </Box>
   );
 }
 

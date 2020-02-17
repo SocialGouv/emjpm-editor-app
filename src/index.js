@@ -1,12 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { css, Global } from "@emotion/core";
+import App from "./App";
+import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
+import theme from "@socialgouv/emjpm-ui-theme";
+import { ThemeProvider } from "theme-ui";
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+  <ThemeProvider theme={theme}>
+    <GlobalStyle />
+    <Global
+      styles={css`
+        body,
+        html,
+        div#__next {
+          font-size: 14px;
+          font-family: "Open Sans", sans-serif;
+          background: #f2f5f9;
+          -webkit-font-smoothing: antialiased;
+        }
+      `}
+    />
+    <App />
+  </ThemeProvider>,
+  document.getElementById("root")
+);

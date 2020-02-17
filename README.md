@@ -9,13 +9,13 @@ eMJPM editor example app,
 
 Authorization link is built with following parameters :
 
-* `editor-id` : editor's ID
-* `editor-secret`: editor's secret
-* `redirect-url`: url to redirect after authorization is done
+* `editor_id` : editor's ID
+* `editor_secret`: editor's secret
+* `redirect_url`: url to redirect after authorization is done
 
 Example  :
 
-`https://emjpm.num.social.gouv.fr/application/authorization?editor-id=1&editor-secret=c1uhbrbyr7d&redirect-url=http://localhost:3001`
+`https://emjpm.num.social.gouv.fr/application/authorization?editor_id=1&editor_secret=c1uhbrbyr7d&redirect_url=http://localhost:3001`
 
 ## Usage
 
