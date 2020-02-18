@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useFormik } from "formik";
-import { Box, Flex, Heading } from "rebass";
-import {
-  BoxWrapper,
-  Input,
-  Button,
-  Card,
-  Text
-} from "@socialgouv/emjpm-ui-core";
+import { Box, Flex, Heading, Link, Image } from "rebass";
+import { BoxWrapper, Input, Button, Card, Text } from "@socialgouv/emjpm-ui-core";
 import { MesureListItem } from "@socialgouv/emjpm-ui-components";
 const emjpmApiUrl =
   process.env.REACT_API_EMJPM_URL ||
@@ -24,17 +18,17 @@ function App() {
       editorSecret: "g5vg4muu46s",
       editorId: "1",
       redirectUrl: "http://localhost:3001",
-      appUrl: "https://v25-21-0-emjpm.dev.fabrique.social.gouv.fr"
+      appUrl: "https://v25-21-0-emjpm.dev.fabrique.social.gouv.fr",
     },
     onSubmit: values => {
       const emjpmAuthQueryString = queryString.stringify({
         editor_id: values.editorId,
         editor_secret: values.editorSecret,
-        redirect_url: values.redirectUrl
+        redirect_url: values.redirectUrl,
       });
       const emjpmAuthUrl = `${values.appUrl}/application/authorization?${emjpmAuthQueryString}`;
       window.location.replace(emjpmAuthUrl);
-    }
+    },
   });
 
   useEffect(() => {
@@ -61,8 +55,8 @@ function App() {
     const fetchMesures = async () => {
       const res = await fetch(emjpmApiMesuresUrl, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
       const { mesures } = await res.json();
       setMesures(mesures);
@@ -72,6 +66,15 @@ function App() {
   }, [token]);
   return (
     <Box bg="#f2f5f9">
+      <Flex px={4} color="black" bg="white" alignItems="center">
+        <Text p={4} fontWeight="bold">
+          <Image src="/logo_emjpm_num.png" width="320px" alt="" />
+        </Text>
+        <Box mx="auto" />
+        <Link variant="nav" href="#!">
+          Profile
+        </Link>
+      </Flex>
       <BoxWrapper mt={6} px={2}>
         <Heading mb="5">eMJPM - Application métier - api test</Heading>
         {token ? (
