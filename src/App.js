@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import { Box, Flex, Heading, Link, Image } from "rebass";
 import { BoxWrapper, Input, Button, Card, Text } from "@socialgouv/emjpm-ui-core";
 import { MesureListItem } from "@socialgouv/emjpm-ui-components";
+import MesuresCreateForm from "./MesuresCreateForm";
 
 const emjpmApiUrl =
   process.env.REACT_APP_API_EMJPM_URL ||
@@ -13,6 +14,7 @@ const emjpmApiMesuresUrl = `${emjpmApiUrl}/editors/mesures?status=Mesure en cour
 function App() {
   const [token, setToken] = useState(null);
   const [mesures, setMesures] = useState(null);
+  const [mesureFormIsVisible, setMesureFormVisible] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -88,16 +90,38 @@ function App() {
                 <code width="80%">{token}</code>
               </pre>
             </Card>
-            <Button
-              mt="2"
-              onClick={() => {
-                setToken(null);
-                setMesures(null);
-                localStorage.removeItem("token");
-              }}
-            >
-              Supprimer le token utilisateur
-            </Button>
+            <Box mb="4">
+              <Button
+                mt="2"
+                mr="2"
+                onClick={() => {
+                  setToken(null);
+                  setMesures(null);
+                  localStorage.removeItem("token");
+                }}
+              >
+                Supprimer le token utilisateur
+              </Button>
+              <Button
+                mt="2"
+                onClick={() => setMesureFormVisible(!mesureFormIsVisible)}
+              >
+                Ajouter une mesure
+              </Button>
+            </Box>
+            {mesureFormIsVisible && (
+              <MesuresCreateForm token={token} apiUrl={emjpmApiUrl} setMesureFormVisible={setMesureFormVisible} />
+            )}
+            {mesures && (
+              <Box mt="6">
+                <Heading mb="5">Mesures</Heading>
+                {mesures.map(mesure => (
+                  <Flex key={mesure.id}>
+                    <MesureListItem mesure={mesures} />
+                  </Flex>
+                ))}
+              </Box>
+            )}
           </Box>
         ) : (
           <Box>
@@ -144,16 +168,6 @@ function App() {
               </Box>
               <Button type="submit">Connexion eMJPM</Button>
             </form>
-          </Box>
-        )}
-        {mesures && (
-          <Box mt="6">
-            <Heading mb="5">Mesures</Heading>
-            {mesures.map(mesure => (
-              <Flex key={mesure.id}>
-                <MesureListItem mesure={mesures} />
-              </Flex>
-            ))}
           </Box>
         )}
       </BoxWrapper>
