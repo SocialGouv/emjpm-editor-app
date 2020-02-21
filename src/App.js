@@ -4,8 +4,9 @@ import { useFormik } from "formik";
 import { Box, Flex, Heading, Link, Image } from "rebass";
 import { BoxWrapper, Input, Button, Card, Text } from "@socialgouv/emjpm-ui-core";
 import { MesureListItem } from "@socialgouv/emjpm-ui-components";
+
 const emjpmApiUrl =
-  process.env.REACT_API_EMJPM_URL ||
+  process.env.REACT_APP_API_EMJPM_URL ||
   "https://api-v25-21-0-emjpm.dev.fabrique.social.gouv.fr/api/v2";
 const emjpmApiMesuresUrl = `${emjpmApiUrl}/editors/mesures?status=Mesure en cours`;
 
@@ -26,7 +27,9 @@ function App() {
         editor_secret: values.editorSecret,
         redirect_url: values.redirectUrl,
       });
+
       const emjpmAuthUrl = `${values.appUrl}/application/authorization?${emjpmAuthQueryString}`;
+
       window.location.replace(emjpmAuthUrl);
     },
   });
@@ -126,7 +129,7 @@ function App() {
                   type="text"
                   placeholder="Url de l'app de démo (default: https://v25-21-0-emjpm.dev.fabrique.social.gouv.fr)"
                   onChange={formik.handleChange}
-                  value={formik.values.url}
+                  value={formik.values.appUrl}
                 />
               </Box>
               <Box mb="2">
@@ -136,7 +139,7 @@ function App() {
                   type="text"
                   placeholder="Url de redirection (default: http://localhost:3001)"
                   onChange={formik.handleChange}
-                  value={formik.values.url}
+                  value={formik.values.redirectUrl}
                 />
               </Box>
               <Button type="submit">Connexion eMJPM</Button>
