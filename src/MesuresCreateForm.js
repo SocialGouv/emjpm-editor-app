@@ -40,7 +40,8 @@ function MesuresCreate(props) {
         numero_rg: values.numero_rg,
         residence: values.residence.value,
         ti_id: values.tribunal.value,
-        type: values.type.value
+        type: values.type.value,
+        status: "Mesure en cours"
       };
 
       const res = await fetch(`${apiUrl}/editors/mesures`, {
