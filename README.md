@@ -1,23 +1,17 @@
 # eMJPM Editeurs
 
-eMJPM editor example app,
+Exemple d'authentification et d'utilisation de l'API [eMJPM](https://github.com/SocialGouv/emjpm) à destination des logiciels métiers.
 
-* user sign in to editor application
-* user click eMJPM authorization link
-* if not logged in to eMJPM, user is invited to sign in with credentials
-* user is redirected to editor application with token as url parameter
+La documentation complète de l'API est disponible sur https://incubateur.social.gouv.fr/emjpm-api-doc/#introduction .
 
-Authorization link is built with following parameters :
+L'application implémente les actions suivantes :
+* configuration de l'authentification
+* demande d'accès à l'API
+* connexion de l'utilisateur sur eMJPM avec le token d'accès
+* redirection sur l'application avec le token utilisateur
+* exemples d'utilisation de l'api mesures avec le token utilisateur
 
-* `editor_id` : editor's ID
-* `editor_secret`: editor's secret
-* `redirect_url`: url to redirect after authorization is done
-
-Example  :
-
-`https://emjpm.num.social.gouv.fr/application/authorization?editor_id=1&editor_secret=c1uhbrbyr7d&redirect_url=http://localhost:3001`
-
-## Usage
+## Install
 
 > Requires Node and Yarn
 
@@ -28,6 +22,8 @@ yarn
 ```
 
 Add `.env` with valid values, see `.env.sample`.
+
+## Run
 
 Start server
 
