@@ -43,7 +43,9 @@ function App() {
         </Link>
       </Flex>
       <BoxWrapper mt={6} px={2}>
-        <Heading mb="5">eMJPM - Application métier - api test</Heading>
+        <Heading mb="2">eMJPM - Application métier exemple</Heading>
+        <Text display="block" color="primary" as="a" mb="1" href="https://github.com/SocialGouv/emjpm-editor-app">Source de l'application</Text>
+        <Text display="block" color="primary" as="a" mb="4" href="https://incubateur.social.gouv.fr/emjpm-api-doc/#introduction">Documenation de l'API eMJPM</Text>
         {token ? (
           <Box>
             <Heading mb="2">Token utilisateur</Heading>
