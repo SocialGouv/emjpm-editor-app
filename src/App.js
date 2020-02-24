@@ -16,6 +16,15 @@ function App() {
   const [mesures, setMesures] = useState(null);
   const [mesureFormIsVisible, setMesureFormVisible] = useState(false);
 
+  const handleDelete = async (id) => {
+    await fetch(`${emjpmApiUrl}/editors/mesures/${id}`, {
+      method: "delete",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+  };
+
   const formik = useFormik({
     initialValues: {
       editorSecret: "g5vg4muu46s",
@@ -116,8 +125,11 @@ function App() {
               <Box mt="6">
                 <Heading mb="5">Mesures</Heading>
                 {mesures.map(mesure => (
-                  <Flex key={mesure.id}>
+                  <Flex key={mesure.id} alignItems="center">
                     <MesureListItem mesure={mesures} />
+                    <Button ml="2" mb="2" onClick={() => handleDelete(mesure.id)}>
+                      Supprimer
+                    </Button>
                   </Flex>
                 ))}
               </Box>
