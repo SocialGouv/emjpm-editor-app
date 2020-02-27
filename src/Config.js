@@ -4,13 +4,15 @@ import { useFormik } from "formik";
 import { Box } from "rebass";
 import { Input, Button } from "@socialgouv/emjpm-ui-core";
 
+import { APP_URL } from "./constants";
+
 function Config() {
   const formik = useFormik({
     initialValues: {
       editorSecret: "g5vg4muu46s",
       editorId: "1",
       redirectUrl: "http://localhost:3001",
-      appUrl: "https://v25-21-0-emjpm.dev.fabrique.social.gouv.fr",
+      appUrl: APP_URL
     },
     onSubmit: values => {
       const emjpmAuthQueryString = queryString.stringify({
@@ -54,7 +56,7 @@ function Config() {
               id="appUrl"
               name="appUrl"
               type="text"
-              placeholder="Url de l'app de démo (default: https://v25-21-0-emjpm.dev.fabrique.social.gouv.fr)"
+              placeholder={`Url de l'app de démo (default: ${APP_URL})`}
               onChange={formik.handleChange}
               value={formik.values.appUrl}
             />

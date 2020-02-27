@@ -3,17 +3,14 @@ import { Box, Flex, Heading } from "rebass";
 import { Button } from "@socialgouv/emjpm-ui-core";
 import { MesureListItem } from "@socialgouv/emjpm-ui-components";
 
-const emjpmApiUrl =
-  process.env.REACT_APP_API_EMJPM_URL ||
-  "https://api-v25-21-0-emjpm.dev.fabrique.social.gouv.fr/api/v2";
-const emjpmApiMesuresUrl = `${emjpmApiUrl}/editors/mesures?status=Mesure en cours`;
+import { API_URL } from "./constants";
 
 function Mesures(props) {
   const { token } = props;
   const [mesures, setMesures] = useState(null);
 
   const handleDelete = async (id) => {
-    await fetch(`${emjpmApiUrl}/editors/mesures/${id}`, {
+    await fetch(`${API_URL}/editors/mesures/${id}`, {
       method: "delete",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -28,7 +25,7 @@ function Mesures(props) {
     }
 
     const fetchMesures = async () => {
-      const res = await fetch(emjpmApiMesuresUrl, {
+      const res = await fetch(`${API_URL}/editors/mesures?status=Mesure en cours`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

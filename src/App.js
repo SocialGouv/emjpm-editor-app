@@ -7,10 +7,6 @@ import Mesures from "./Mesures";
 import MesuresCreateForm from "./MesuresCreateForm";
 import Config from "./Config";
 
-const emjpmApiUrl =
-  process.env.REACT_APP_API_EMJPM_URL ||
-  "https://api-v25-21-0-emjpm.dev.fabrique.social.gouv.fr/api/v2";
-
 function App() {
   const [token, setToken] = useState(null);
   const [mesureFormIsVisible, setMesureFormVisible] = useState(false);
@@ -73,7 +69,7 @@ function App() {
               </Button>
             </Box>
             {mesureFormIsVisible && (
-              <MesuresCreateForm token={token} apiUrl={emjpmApiUrl} setMesureFormVisible={setMesureFormVisible} />
+              <MesuresCreateForm token={token} setMesureFormVisible={setMesureFormVisible} />
             )}
             <Mesures token={token} />
           </Box>

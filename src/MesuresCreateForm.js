@@ -3,10 +3,10 @@ import { useFormik } from "formik";
 import { Input, Button, Field, InlineError, Select } from "@socialgouv/emjpm-ui-core";
 import { Box, Heading, Flex } from "rebass";
 
-import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE, TRIBUNAL_LIST, ANTENNE_OPTIONS } from "./constants";
+import { API_URL, CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE, TRIBUNAL_LIST, ANTENNE_OPTIONS } from "./constants";
 
 function MesuresCreate(props) {
-  const { token, apiUrl, setMesureFormVisible } = props;
+  const { token, setMesureFormVisible } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -44,7 +44,7 @@ function MesuresCreate(props) {
         status: "Mesure en cours"
       };
 
-      const res = await fetch(`${apiUrl}/editors/mesures`, {
+      const res = await fetch(`${API_URL}/editors/mesures`, {
         body: JSON.stringify(payload),
         method: "POST",
         headers: {

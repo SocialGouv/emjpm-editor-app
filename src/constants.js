@@ -169,3 +169,9 @@ export const TRIBUNAL_LIST = [
 ];
 
 export const ANTENNE_OPTIONS = [];
+
+export const APP_URL = process.env.REACT_APP_EMJPM_URL ||
+  "https://apitest-emjpm.dev.fabrique.social.gouv.fr";
+
+export const API_URL = process.env.REACT_APP_API_EMJPM_URL ||
+  "https://api-apitest-emjpm.dev.fabrique.social.gouv.fr/api";
