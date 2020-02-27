@@ -1,4 +1,4 @@
-# eMJPM Editeurs
+# Exemple d'utilisation de l'API eMJPM
 
 Exemple d'authentification et d'utilisation de l'API [eMJPM](https://github.com/SocialGouv/emjpm) à destination des logiciels métiers.
 
