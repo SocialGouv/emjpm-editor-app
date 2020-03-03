@@ -9,10 +9,10 @@ import { APP_URL } from "./constants";
 function Config() {
   const formik = useFormik({
     initialValues: {
-      editorSecret: "g5vg4muu46s",
+      editorSecret: "53tes5gy1zk",
       editorId: "1",
-      redirectUrl: "http://localhost:3001",
-      appUrl: APP_URL
+      redirectUrl: "https://emjpm-editor-demo.netlify.com/",
+      appUrl: APP_URL,
     },
     onSubmit: values => {
       const emjpmAuthQueryString = queryString.stringify({
@@ -66,7 +66,7 @@ function Config() {
               id="redirectUrl"
               name="redirectUrl"
               type="text"
-              placeholder="Url de redirection (default: http://localhost:3001)"
+              placeholder="Url de redirection (default: https://emjpm-editor-demo.netlify.com)"
               onChange={formik.handleChange}
               value={formik.values.redirectUrl}
             />
