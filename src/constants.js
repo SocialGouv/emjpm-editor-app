@@ -19,6 +19,10 @@ export const TYPES_ETABLISSEMENT = [
     value: 'etablissement_handicapes',
   },
   {
+    label: 'Etablissement pour les personnes agées',
+    value: 'etablissement_personne_agee',
+  },
+  {
     label: 'Autre etablissement',
     value: 'autre_etablissement_s_ms',
   },
