@@ -24,7 +24,8 @@
     "rebass": "^4.0.7",
     "styled-components": "^5.0.1",
     "swr": "^0.2.3",
-    "theme-ui": "^0.2.33"
+    "theme-ui": "^0.2.33",
+    "yup": "^0.29.1"
   },
   "scripts": {
     "start": "react-scripts start",

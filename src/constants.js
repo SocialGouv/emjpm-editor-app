@@ -13,6 +13,44 @@ export const MESURE_STATUS_LABEL_VALUE = [
   },
 ];
 
+export const TYPES_ETABLISSEMENT = [
+  {
+    label: 'Etablissement pour les personnes handicapées',
+    value: 'etablissement_handicapes',
+  },
+  {
+    label: 'Etablissement pour les personnes agées',
+    value: 'etablissement_personne_agee',
+  },
+  {
+    label: 'Autre etablissement',
+    value: 'autre_etablissement_s_ms',
+  },
+  {
+    label: 'Etablissement hospitalier',
+    value: 'etablissement_hospitalier',
+  },
+  {
+    label: 'Etablissement psychiatrique',
+    value: 'etablissement_psychiatrique',
+  },
+];
+
+export const CHAMP_MESURE = [
+  {
+    label: 'aux biens',
+    value: 'protection_bien',
+  },
+  {
+    label: 'aux biens et à la personne',
+    value: 'protection_bien_personne',
+  },
+  {
+    label: 'à la personne',
+    value: 'protection_personne',
+  },
+];
+
 export const REVISION = [
   {
     label: 'aggravation',

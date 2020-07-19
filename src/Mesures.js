@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { Box, Flex, Heading } from 'rebass';
 import { Button } from '@socialgouv/emjpm-ui-core';
 import { MesureListItem } from '@socialgouv/emjpm-ui-components';
@@ -37,8 +37,6 @@ function Mesures(props) {
     return <Box>{error}</Box>;
   }
 
-  console.log('data', data);
-
   return (
     <Box mt='6'>
       <Heading mb='5'>Mesures</Heading>
@@ -46,7 +44,7 @@ function Mesures(props) {
         data.mesures &&
         data.mesures.map((mesure) => (
           <Flex key={mesure.id} alignItems='center'>
-            <MesureListItem mesure={mesure} />
+            <MesureListItem onClick={() => {}} mesure={mesure} />
             <Button ml='2' mb='2' onClick={() => handleDelete(mesure.id)}>
               Supprimer
             </Button>

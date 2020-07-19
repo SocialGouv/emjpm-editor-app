@@ -1,4 +1,5 @@
 import React from 'react';
+import * as yup from 'yup';
 import { SquaredCross } from '@styled-icons/entypo/SquaredCross';
 import { useFormik, FieldArray, FormikProvider } from 'formik';
 import moment from 'moment';
@@ -19,6 +20,8 @@ import {
   NATURE_MESURE_OPTIONS,
   CAUSES_SORTIE,
   REVISION,
+  CHAMP_MESURE,
+  TYPES_ETABLISSEMENT,
 } from './constants';
 
 const COUNTRIES = [
@@ -27,6 +30,43 @@ const COUNTRIES = [
     value: 'FR',
   },
 ];
+
+yup.setLocale({
+  mixed: {
+    required: 'Veuillez renseigner ce champ.',
+  },
+  number: {
+    integer: 'Le nombre indiqué doit être un entier',
+    max: 'Le nombre indiqué doit être inférieur ou égal à ${max}',
+    min: 'Le nombre indiqué doit être supérieur ou égal à ${min}',
+    positive: 'Le nombre indiqué doit être positif',
+  },
+  string: {
+    email: "Le format de l'adresse email n'est pas correct.",
+    length: 'Le champ doit comporter ${length} caractères.',
+  },
+});
+
+const validationSchema = yup.object().shape({
+  numero_rg: yup.string().required(),
+  numero_dossier: yup.string().required(),
+  annee: yup.number().integer().required(),
+  civilite: yup.string().required(),
+  date_nomination: yup.string().required(),
+  tribunal_siret: yup.string().required(),
+  etats: yup.array().of(
+    yup.object().shape({
+      date_changement_etat: yup.string().required(),
+      nature_mesure: yup.string().required(),
+      champ_mesure: yup.string().required(),
+      lieu_vie: yup.string().required(),
+      pays: yup.string().required(),
+      code_postal: yup.string().required(),
+      ville: yup.string().required(),
+      type_etablissement: yup.string().required(),
+    })
+  ),
+});
 
 function MesuresCreate(props) {
   const { token, setMesureFormVisible } = props;
@@ -51,6 +91,8 @@ function MesuresCreate(props) {
           code_postal: '',
           pays: 'FR',
           lieu_vie: '',
+          champ_mesure: '',
+          etablissement_siret: '',
         },
       ],
     },
@@ -61,36 +103,41 @@ function MesuresCreate(props) {
           ? Number.parseInt(values.antenne.value)
           : null,
         tribunal_cabinet: '',
-        cause_sortie: values.cause_sortie.value || null,
-        civilite: values.civilite.value,
-        date_fin_mesure: values.date_fin_mesure || null,
-        date_nomination: values.date_nomination || null,
-        date_premier_mesure: values.date_premier_mesure || null,
-        date_protection_en_cours: values.date_protection_en_cours || null,
+        cause_sortie: values.cause_sortie || undefined,
+        civilite: values.civilite,
+        date_fin_mesure: values.date_fin_mesure || undefined,
+        date_nomination: values.date_nomination || undefined,
+        date_premier_mesure: values.date_premier_mesure || undefined,
+        date_protection_en_cours: values.date_protection_en_cours || undefined,
         numero_dossier: values.numero_dossier,
         numero_rg: values.numero_rg,
-        resultat_revision: values.resultat_revision.value || null,
-        tribunal_siret: values.tribunal_siret || null,
+        resultat_revision: values.resultat_revision || undefined,
+        tribunal_siret: values.tribunal_siret || undefined,
         etats: values.etats,
         ressources: {},
       };
 
-      console.log(payload);
-      debugger;
+      try {
+        const res = await fetch(`${API_URL}/editors/mesures`, {
+          body: JSON.stringify(payload),
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-type': 'application/json',
+          },
+        });
 
-      const res = await fetch(`${API_URL}/editors/mesures`, {
-        body: JSON.stringify(payload),
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-type': 'application/json',
-        },
-      });
-
-      const json = await res.json();
-
-      console.log(json);
+        const { errors } = await res.json();
+        if (!errors && (res.status === 200 || res.status === 201)) {
+          document.location.reload(true);
+        } else {
+          console.error(errors);
+        }
+      } catch (err) {
+        console.error(err.message);
+      }
     },
+    validationSchema,
   });
 
   return (
@@ -106,7 +153,7 @@ function MesuresCreate(props) {
                 name='numero_rg'
                 hasError={formik.errors.numero_rg && formik.touched.numero_rg}
                 onChange={formik.handleChange}
-                placeholder='Numéro RG'
+                placeholder='Numéro RG *'
               />
               {formik.touched.numero_rg && (
                 <InlineError
@@ -126,7 +173,7 @@ function MesuresCreate(props) {
                   formik.errors.numero_dossier && formik.touched.numero_dossier
                 }
                 onChange={formik.handleChange}
-                placeholder='Numero de dossier'
+                placeholder='Numero de dossier *'
               />
               {formik.touched.numero_dossier && (
                 <InlineError
@@ -149,7 +196,7 @@ function MesuresCreate(props) {
                   formik.errors.tribunal_siret && formik.touched.tribunal_siret
                 }
                 onChange={formik.handleChange}
-                placeholder='Tribunal (siret)'
+                placeholder='Tribunal (siret) *'
               />
               {formik.touched.tribunal_siret && (
                 <InlineError
@@ -185,13 +232,15 @@ function MesuresCreate(props) {
             id='resultat_revision'
             name='resultat_revision'
             placeholder='Résultat révision'
-            value={formik.values.resultat_revision}
+            value={REVISION.find(
+              (r) => r.value === formik.values.resultat_revision
+            )}
             hasError={
               formik.errors.resultat_revision &&
               formik.touched.resultat_revision
             }
             onChange={(option) =>
-              formik.setFieldValue('resultat_revision', option)
+              formik.setFieldValue('resultat_revision', option.value)
             }
             options={REVISION}
           />
@@ -209,18 +258,22 @@ function MesuresCreate(props) {
               <Select
                 id='civilite'
                 name='civilite'
-                placeholder='Civilité'
-                value={formik.values.civilite}
+                placeholder='Civilité *'
+                value={CIVILITY.find((c) => {
+                  return c.value === formik.values.civilite;
+                })}
                 hasError={formik.errors.civilite && formik.touched.civilite}
-                onChange={(option) => formik.setFieldValue('civilite', option)}
+                onChange={(option) => {
+                  formik.setFieldValue('civilite', option.value);
+                }}
                 options={CIVILITY}
               />
-              {formik.touched.civilite && (
+              {/* {formik.touched.civilite && (
                 <InlineError
                   message={formik.errors.civilite}
                   fieldId='civilite'
                 />
-              )}
+              )} */}
             </Field>
           </Box>
           <Box ml={2} width={1 / 2}>
@@ -232,7 +285,7 @@ function MesuresCreate(props) {
                 type='number'
                 hasError={formik.errors.annee && formik.touched.annee}
                 onChange={formik.handleChange}
-                placeholder='année de naissance'
+                placeholder='Année de naissance *'
               />
               {formik.touched.annee && (
                 <InlineError message={formik.errors.annee} fieldId='type' />
@@ -306,7 +359,7 @@ function MesuresCreate(props) {
                   formik.touched.date_nomination
                 }
                 onChange={formik.handleChange}
-                placeholder='Date nomination'
+                placeholder='Date nomination *'
               />
               {formik.touched.date_nomination && (
                 <InlineError
@@ -347,12 +400,14 @@ function MesuresCreate(props) {
                 id='cause_sortie'
                 name='cause_sortie'
                 placeholder='Cause de sortie'
-                value={formik.values.cause_sortie}
+                value={CAUSES_SORTIE.find(
+                  (c) => c.value === formik.values.cause_sortie
+                )}
                 hasError={
                   formik.errors.cause_sortie && formik.touched.cause_sortie
                 }
                 onChange={(option) =>
-                  formik.setFieldValue('cause_sortie', option)
+                  formik.setFieldValue('cause_sortie', option.value)
                 }
                 options={CAUSES_SORTIE}
               />
@@ -380,6 +435,12 @@ function MesuresCreate(props) {
                     onClick={() =>
                       arrayHelpers.push({
                         date_changement_etat: moment().format('yyyy-MM-DD'),
+                        ville: '',
+                        code_postal: '',
+                        pays: 'FR',
+                        lieu_vie: '',
+                        champ_mesure: '',
+                        etablissement_siret: '',
                       })
                     }
                   >
@@ -390,7 +451,6 @@ function MesuresCreate(props) {
 
               {formik.values.etats &&
                 formik.values.etats.map((etat, index) => {
-                  console.log('etat', etat);
                   return (
                     <Card mb={4} sx={{ position: 'relative' }} key={index}>
                       <Box
@@ -424,9 +484,12 @@ function MesuresCreate(props) {
                               .date_changement_etat
                           }
                           onChange={(event) => {
-                            console.log('value', event.target.value);
+                            formik.setFieldValue(
+                              `etats[${index}].date_changement_etat`,
+                              event.target.value
+                            );
                           }}
-                          placeholder="Date de changement d'état"
+                          placeholder="Date de changement d'état *"
                         />
                         {formik.errors.etats &&
                           formik.touched.etats &&
@@ -449,21 +512,26 @@ function MesuresCreate(props) {
                               value={etat.ville}
                               id={`etats[${index}].ville`}
                               name={`etats[${index}].ville`}
-                              // hasError={
-                              //   formik.errors.etats[`${index}`].ville &&
-                              //   formik.touched.etats[`${index}`].ville
-                              // }
-                              onChange={formik.handleChange}
-                              placeholder='Ville'
+                              hasError={
+                                !!formik.errors.etats &&
+                                !!formik.errors.etats[index].ville
+                              }
+                              onChange={(event) => {
+                                formik.setFieldValue(
+                                  `etats[${index}].ville`,
+                                  event.target.value
+                                );
+                              }}
+                              placeholder='Ville *'
                             />
-                            {formik.errors.etats &&
-                              formik.touched.etats &&
-                              formik.touched.etats[`${index}`].ville && (
+                            {!!formik.errors.etats &&
+                              !!formik.touched.etats &&
+                              !!formik.touched.etats[`${index}`].ville && (
                                 <InlineError
                                   message={
                                     formik.errors.etats[`${index}`].ville
                                   }
-                                  fieldId='ville'
+                                  fieldId={`etats[${index}].ville`}
                                 />
                               )}
                           </Field>
@@ -475,20 +543,20 @@ function MesuresCreate(props) {
                               id={`etats[${index}].code_postal`}
                               name={`etats[${index}].code_postal`}
                               hasError={
-                                formik.errors.etats &&
-                                formik.touched.etats &&
-                                formik.errors.etats[`${index}`].code_postal &&
-                                formik.touched.etats[`${index}`].code_postal
+                                !!formik.errors.etats &&
+                                !!formik.touched.etats &&
+                                !!formik.errors.etats[index].code_postal &&
+                                !!formik.touched.etats[index].code_postal
                               }
                               onChange={formik.handleChange}
-                              placeholder='Code postal'
+                              placeholder='Code postal *'
                             />
-                            {formik.errors.etats &&
-                              formik.touched.etats &&
-                              formik.touched.etats[`${index}`].code_postal && (
+                            {!!formik.errors.etats &&
+                              !!formik.touched.etats &&
+                              !!formik.touched.etats[index].code_postal && (
                                 <InlineError
                                   message={
-                                    formik.errors.etats[`${index}`].code_postal
+                                    formik.errors.etats[index].code_postal
                                   }
                                   fieldId='code_postal'
                                 />
@@ -499,15 +567,49 @@ function MesuresCreate(props) {
 
                       <Field>
                         <Select
+                          id={`etats[${index}].champ_mesure`}
+                          name={`etats[${index}].champ_mesure`}
+                          placeholder='Champ mesure *'
+                          value={CHAMP_MESURE.find(
+                            (c) => c.value === etat.champ_mesure
+                          )}
+                          hasError={
+                            !!formik.errors.etats &&
+                            !!formik.touched.etats &&
+                            !!formik.errors.etats[index].champ_mesure &&
+                            !!formik.touched.etats[index].champ_mesure
+                          }
+                          onChange={(option) =>
+                            formik.setFieldValue(
+                              `etats[${index}].champ_mesure`,
+                              option.value
+                            )
+                          }
+                          options={CHAMP_MESURE}
+                        />
+                        {!!formik.errors.etats &&
+                          !!formik.touched.etats &&
+                          !!formik.touched.etats[index].champ_mesure && (
+                            <InlineError
+                              message={
+                                formik.errors.etats[`${index}`].champ_mesure
+                              }
+                              fieldId={`etats[${index}].champ_mesure`}
+                            />
+                          )}
+                      </Field>
+
+                      <Field>
+                        <Select
                           id={`etats[${index}].pays`}
                           name={`etats[${index}].pays`}
-                          placeholder='Pays'
+                          placeholder='Pays *'
                           value={COUNTRIES.find((c) => c.value === etat.pays)}
                           hasError={
-                            formik.errors.etats &&
-                            formik.touched.etats &&
-                            formik.errors.etats[`${index}`].pays &&
-                            formik.touched.etats[`${index}`].pays
+                            !!formik.errors.etats &&
+                            !!formik.touched.etats &&
+                            !!formik.errors.etats[index].pays &&
+                            !!formik.touched.etats[index].pays
                           }
                           onChange={(option) =>
                             formik.setFieldValue(
@@ -517,8 +619,8 @@ function MesuresCreate(props) {
                           }
                           options={COUNTRIES}
                         />
-                        {formik.errors.etats &&
-                          formik.errors.etats[`${index}`].pays && (
+                        {!!formik.errors.etats &&
+                          !!formik.errors.etats[index].pays && (
                             <InlineError
                               message={formik.errors.etats[`${index}`].pays}
                               fieldId={`etats[${index}].pays`}
@@ -530,15 +632,15 @@ function MesuresCreate(props) {
                         <Select
                           id={`etats[${index}].nature_mesure`}
                           name={`etats[${index}].nature_mesure`}
-                          placeholder='Nature mesure'
+                          placeholder='Nature mesure *'
                           value={NATURE_MESURE_OPTIONS.find(
                             (v) => v.value === etat.nature_mesure
                           )}
                           hasError={
-                            formik.errors.etats &&
-                            formik.touched.etats &&
-                            formik.errors.etats[`${index}`].nature_mesure &&
-                            formik.touched.etats[`${index}`].nature_mesure
+                            !!formik.errors.etats &&
+                            !!formik.touched.etats &&
+                            !!formik.errors.etats[index].nature_mesure &&
+                            !!formik.touched.etats[index].nature_mesure
                           }
                           onChange={(option) =>
                             formik.setFieldValue(
@@ -548,7 +650,7 @@ function MesuresCreate(props) {
                           }
                           options={NATURE_MESURE_OPTIONS}
                         />
-                        {formik.touched.nature_mesure && (
+                        {!!formik.touched.nature_mesure && (
                           <InlineError
                             message={
                               formik.errors.etats[`${index}`].nature_mesure
@@ -562,33 +664,93 @@ function MesuresCreate(props) {
                         <Select
                           id={`etats[${index}].lieu_vie`}
                           name={`etats[${index}].lieu_vie`}
-                          placeholder='Lieu de vie'
+                          placeholder='Lieu de vie *'
                           value={LIEU_VIE_OPTIONS.find(
                             (v) => v.value === etat.lieu_vie
                           )}
                           hasError={
-                            formik.errors.etats &&
-                            formik.touched.etats &&
-                            formik.errors.etats[`${index}`].lieu_vie &&
-                            formik.touched.etats[`${index}`].lieu_vie
+                            !!formik.errors.etats &&
+                            !!formik.errors.etats[index].lieu_vie
                           }
-                          onChange={(option) =>
+                          onChange={(option) => {
                             formik.setFieldValue(
                               `etats[${index}].lieu_vie`,
                               option.value
-                            )
-                          }
+                            );
+                          }}
                           options={LIEU_VIE_OPTIONS}
                         />
-                        {formik.touched.etats &&
-                          formik.errors.etats[`${index}`] &&
-                          formik.touched.etats[`${index}`].lieu_vie && (
-                            <InlineError
-                              message={formik.errors.etats[`${index}`].lieu_vie}
-                              fieldId={`etats[${index}].lieu_vie`}
-                            />
-                          )}
+
+                        <InlineError
+                          message={
+                            !!formik.errors.etats &&
+                            !!formik.errors.etats[index]
+                              ? formik.errors.etats[index].lieu_vie
+                              : ''
+                          }
+                          fieldId={`etats[${index}].lieu_vie`}
+                        />
                       </Field>
+
+                      <Flex>
+                        <Box mr={2} width={1 / 2}>
+                          <Field>
+                            <Select
+                              id={`etats[${index}].type_etablissement`}
+                              name={`etats[${index}].type_etablissement`}
+                              placeholder="Type d'établissement *"
+                              value={TYPES_ETABLISSEMENT.find(
+                                (v) => v.value === etat.type_etablissement
+                              )}
+                              hasError={
+                                !!formik.errors.etats &&
+                                !!formik.touched.etats &&
+                                !!formik.errors.etats[index]
+                                  .type_etablissement &&
+                                !!formik.touched.etats[index].type_etablissement
+                              }
+                              onChange={(option) =>
+                                formik.setFieldValue(
+                                  `etats[${index}].type_etablissement`,
+                                  option.value
+                                )
+                              }
+                              options={TYPES_ETABLISSEMENT}
+                            />
+                            {!!formik.errors.etats &&
+                              !!formik.touched.type_etablissement && (
+                                <InlineError
+                                  message={
+                                    formik.errors.etats[`${index}`]
+                                      .type_etablissement
+                                  }
+                                  fieldId={`etats[${index}].type_etablissement`}
+                                />
+                              )}
+                          </Field>
+                        </Box>
+                        <Box ml={2} width={1 / 2}>
+                          <Field>
+                            <Input
+                              value={formik.values.etablissement_siret}
+                              id={`etats[${index}].etablissement_siret`}
+                              name={`etats[${index}].etablissement_siret`}
+                              hasError={
+                                !!formik.errors.etablissement_siret &&
+                                !!formik.touched.etablissement_siret
+                              }
+                              onChange={formik.handleChange}
+                              placeholder='Etablissement (siret)'
+                            />
+                            {!!formik.touched.etablissement_siret && (
+                              <InlineError
+                                message={formik.errors.etablissement_siret}
+                                fieldId={`etats[${index}].etablissement_siret`}
+                              />
+                            )}
+                          </Field>
+                        </Box>
+                      </Flex>
                     </Card>
                   );
                 })}
@@ -596,83 +758,6 @@ function MesuresCreate(props) {
           )}
         />
 
-        {/* <Field>
-          <Select
-            id='residence'
-            name='residence'
-            placeholder='Type de residence'
-            value={formik.values.residence}
-            hasError={formik.errors.residence && formik.touched.residence}
-            onChange={(option) => formik.setFieldValue('residence', option)}
-            options={RESIDENCE}
-          />
-          {formik.touched.residence && (
-            <InlineError
-              message={formik.errors.residence}
-              fieldId='residence'
-            />
-          )}
-        </Field>
-        <Field>
-          <Input
-            value={formik.values.postcode}
-            id='postcode'
-            name='postcode'
-            hasError={formik.errors.postcode && formik.touched.postcode}
-            onChange={formik.handleChange}
-            placeholder='Code postal'
-          />
-          {formik.touched.annee && (
-            <InlineError message={formik.errors.annee} fieldId='postcode' />
-          )}
-        </Field>
-        <Field>
-          <Input
-            value={formik.values.latitude}
-            id='latitude'
-            name='latitude'
-            hasError={formik.errors.latitude && formik.touched.latitude}
-            onChange={formik.handleChange}
-            placeholder='Latitude'
-          />
-          {formik.touched.latitude && (
-            <InlineError message={formik.errors.latitude} fieldId='latitude' />
-          )}
-        </Field>
-        <Field>
-          <Input
-            value={formik.values.longitude}
-            id='longitude'
-            name='longitude'
-            hasError={formik.errors.longitude && formik.touched.longitude}
-            onChange={formik.handleChange}
-            placeholder='Longitude'
-          />
-          {formik.touched.longitude && (
-            <InlineError
-              message={formik.errors.longitude}
-              fieldId='longitude'
-            />
-          )}
-        </Field>
-        <Field>
-          <Input
-            value={formik.values.department_id}
-            id='department_id'
-            name='department_id'
-            hasError={
-              formik.errors.department_id && formik.touched.department_id
-            }
-            onChange={formik.handleChange}
-            placeholder='Department ID'
-          />
-          {formik.touched.department_id && (
-            <InlineError
-              message={formik.errors.department_id}
-              fieldId='department_id'
-            />
-          )}
-        </Field> */}
         <Flex justifyContent='flex-end' alignItems='center'>
           <Button
             mr='2'
