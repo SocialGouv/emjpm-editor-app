@@ -37,13 +37,10 @@ yup.setLocale({
   },
   number: {
     integer: 'Le nombre indiqué doit être un entier',
-    max: 'Le nombre indiqué doit être inférieur ou égal à ${max}',
-    min: 'Le nombre indiqué doit être supérieur ou égal à ${min}',
     positive: 'Le nombre indiqué doit être positif',
   },
   string: {
     email: "Le format de l'adresse email n'est pas correct.",
-    length: 'Le champ doit comporter ${length} caractères.',
   },
 });
 
@@ -96,7 +93,7 @@ function MesuresCreate(props) {
         },
       ],
     },
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setFieldError }) => {
       const payload = {
         annee_naissance: values.annee,
         antenne_id: values.antenne
@@ -114,7 +111,7 @@ function MesuresCreate(props) {
         resultat_revision: values.resultat_revision || undefined,
         tribunal_siret: values.tribunal_siret || undefined,
         etats: values.etats,
-        ressources: {},
+        ressources: [],
       };
 
       try {
@@ -127,11 +124,17 @@ function MesuresCreate(props) {
           },
         });
 
-        const { errors } = await res.json();
-        if (!errors && (res.status === 200 || res.status === 201)) {
+        const { error } = await res.json();
+        if (!error && (res.status === 200 || res.status === 201)) {
           document.location.reload(true);
         } else {
-          console.error(errors);
+          if (error.includes('Siret')) {
+            setFieldError(
+              'tribunal_siret',
+              "Le siret renseigné n'est pas valide"
+            );
+          }
+          console.error(error);
         }
       } catch (err) {
         console.error(err.message);
@@ -337,7 +340,7 @@ function MesuresCreate(props) {
                   formik.touched.date_premier_mesure
                 }
                 onChange={formik.handleChange}
-                placeholder='LABEL A DEFINIR (date_premier_mesure)'
+                placeholder='Date de la première mise sous protection juridique'
               />
               {formik.touched.date_premier_mesure && (
                 <InlineError
