@@ -27,6 +27,7 @@ Test:
 # The website it statically built with React Scripts
 # Here we manually reuse the `build` dir in Dockerfile
 Build:
+  needs: []
   cache:
     key:
       files:
