@@ -2,7 +2,7 @@
 
 Exemple d'authentification et d'utilisation de l'API [eMJPM](https://github.com/SocialGouv/emjpm) à destination des logiciels métiers.
 
-La documentation complète de l'API est disponible sur https://incubateur.social.gouv.fr/emjpm-api-doc/#introduction .
+La documentation complète de l'API est disponible sur https://socialgouv.github.io/emjpm-api-doc/#introduction .
 
 L'application implémente les actions suivantes :
 * configuration de l'authentification
