@@ -26,6 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "k8s": "yarn --silent --cwd .k8s",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
