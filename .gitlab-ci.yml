@@ -1,0 +1,19 @@
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops.yml
+    ref: v17.0.0-beta.35
+
+variables:
+  AUTO_DEVOPS_RELEASE_AUTO: "🔖"
+  AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
+
+# NOTE(douglasduteil): use custom build job
+# The website it statically built with React Scripts
+# Here we manually reuse the `build` dir in Dockerfile
+Build:
+  variables:
+    VERSION: ${CI_COMMIT_SHORT_SHA}
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - build
