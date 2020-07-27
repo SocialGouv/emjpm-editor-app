@@ -11,7 +11,7 @@ L'application implémente les actions suivantes :
 * redirection sur l'application avec le token utilisateur
 * exemples d'utilisation de l'api mesures avec le token utilisateur
 
-## Install
+## Installation
 
 > Requires Node and Yarn
 
