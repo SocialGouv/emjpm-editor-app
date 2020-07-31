@@ -1,3 +1,11 @@
+## [1.2.3](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.2...v1.2.3) (2020-07-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency kubernetes-models to ^0.8.1 ([#26](https://github.com/SocialGouv/emjpm-editor-app/issues/26)) ([dc09f14](https://github.com/SocialGouv/emjpm-editor-app/commit/dc09f14f48374fd9d13a35f68c3f69396b4f615c))
+* **deps:** update dependency query-string to ^6.13.1 ([#27](https://github.com/SocialGouv/emjpm-editor-app/issues/27)) ([1206f81](https://github.com/SocialGouv/emjpm-editor-app/commit/1206f814eb004810866d2a42f50d144ce9b03863))
+
 ## [1.2.2](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.1...v1.2.2) (2020-07-31)
 
 
