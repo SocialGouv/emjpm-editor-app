@@ -16,7 +16,7 @@
     "@testing-library/user-event": "^7.1.2",
     "formik": "^2.1.5",
     "moment": "^2.27.0",
-    "query-string": "^6.10.1",
+    "query-string": "^6.13.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
