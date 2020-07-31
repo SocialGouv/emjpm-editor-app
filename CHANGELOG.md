@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.5...v1.2.6) (2020-07-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency styled-components to ^5.1.1 ([#29](https://github.com/SocialGouv/emjpm-editor-app/issues/29)) ([36a94c3](https://github.com/SocialGouv/emjpm-editor-app/commit/36a94c3b66b879051b32ecd0bde3ff2beb863ace))
+
 ## [1.2.5](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.4...v1.2.5) (2020-07-31)
 
 
