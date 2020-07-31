@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.1.0...v1.2.0) (2020-07-31)
+
+
+### Features
+
+* use kosko-charts:2.0.0-beta.23 ([#16](https://github.com/SocialGouv/emjpm-editor-app/issues/16)) ([5579f1e](https://github.com/SocialGouv/emjpm-editor-app/commit/5579f1e1c01e0cbf41fbd2ad8440c86923b2ac01))
+
 # [1.1.0](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.0.0...v1.1.0) (2020-07-31)
 
 
