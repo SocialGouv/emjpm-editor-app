@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.0.0...v1.1.0) (2020-07-31)
+
+
+### Bug Fixes
+
+* typo ([#17](https://github.com/SocialGouv/emjpm-editor-app/issues/17)) ([c9338a9](https://github.com/SocialGouv/emjpm-editor-app/commit/c9338a9115b5ff3f6d2e066de5c4260035801540))
+
+
+### Features
+
+* **app:** apply modifications for new mesure api ([#14](https://github.com/SocialGouv/emjpm-editor-app/issues/14)) ([aecd698](https://github.com/SocialGouv/emjpm-editor-app/commit/aecd698b7c9f0c8bef37b4eb0e52d55372e382d6))
+
 # 1.0.0 (2020-07-27)
 
 
