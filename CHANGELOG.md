@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.0...v1.2.1) (2020-07-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @mdx-js/react to ^1.6.16 ([#24](https://github.com/SocialGouv/emjpm-editor-app/issues/24)) ([32aef0f](https://github.com/SocialGouv/emjpm-editor-app/commit/32aef0fc08e48da0e15d0a72c31b1d67a3b688e9))
+
 # [1.2.0](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.1.0...v1.2.0) (2020-07-31)
 
 
