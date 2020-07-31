@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.1...v1.2.2) (2020-07-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency formik to ^2.1.5 ([#25](https://github.com/SocialGouv/emjpm-editor-app/issues/25)) ([995552c](https://github.com/SocialGouv/emjpm-editor-app/commit/995552c898cc67167ea1f439c2b993dcff747749))
+
 ## [1.2.1](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.0...v1.2.1) (2020-07-31)
 
 
