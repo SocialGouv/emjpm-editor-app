@@ -125,19 +125,19 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@sindresorhus/is@^3.0.0":
+"@sindresorhus/is@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-3.1.0.tgz#d8735532635bea69ad39119df5f0f10099bd09dc"
   integrity sha512-n4J+zu52VdY43kdi/XdI9DzuMr1Mur8zFL5ZRG2opCans9aiFwkPxHYFEb5Xgy7n1Z4K6WfI4FpqUqsh3E8BPQ==
 
-"@socialgouv/kosko-charts@2.0.0-beta.23":
-  version "2.0.0-beta.23"
-  resolved "https://registry.yarnpkg.com/@socialgouv/kosko-charts/-/kosko-charts-2.0.0-beta.23.tgz#8442d9a6bdba05d62f8c5be8633adcdbdfc87c84"
-  integrity sha512-roekLWrIxMjKf5Wq6ugua2coaz8ol8gzKm/T/HeNTsyHH0g+g3jzlqrpQR9jhBfyLKst7MkA0YmHIeYMygU/Fg==
+"@socialgouv/kosko-charts@2.1.4":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@socialgouv/kosko-charts/-/kosko-charts-2.1.4.tgz#af215c32f4b4f3f8a910439aee2f4c7ec8d328fe"
+  integrity sha512-lCwb7lB6XLbb8X/Owp9YU6ox+hNRGg47ejdCBef8aL/CIVBrcrHVtJjfdi3NBaf7qrJbQdpBc4K0okFPvQs24w==
   dependencies:
     "@kubernetes-models/sealed-secrets" "^0.1.4"
-    "@sindresorhus/is" "^3.0.0"
-    fp-ts "^2.6.6"
+    "@sindresorhus/is" "^3.1.0"
+    fp-ts "^2.7.1"
     io-ts "2.2.7"
 
 "@types/color-name@^1.1.1":
@@ -418,7 +418,7 @@ find-up@^4.0.0, find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-fp-ts@^2.6.6:
+fp-ts@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.7.1.tgz#7bd754f3362f4b9bc4d272a97c0658e9a1bc16bc"
   integrity sha512-rYy41jF1gVhBNYbPwup50dtyT686OKOoa86PXwh8aKpBRfmvPhnBh2zUkOYj84GIMSCsgY+oJ/RVhVKRvWNPTA==
