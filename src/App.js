@@ -41,7 +41,7 @@ function App() {
       <BoxWrapper mt={6} px={2}>
         <Heading mb="2">eMJPM - Application métier exemple</Heading>
         <Text display="block" color="primary" as="a" mb="1" href="https://github.com/SocialGouv/emjpm-editor-app">Source de l'application</Text>
-        <Text display="block" color="primary" as="a" mb="4" href="https://socialgouv.github.io/emjpm-api-doc/#introduction">Documenation de l'API eMJPM</Text>
+        <Text display="block" color="primary" as="a" mb="4" href="https://socialgouv.github.io/emjpm-api-doc/#introduction">Documentation de l'API eMJPM</Text>
         {token ? (
           <Box>
             <Heading mb="2">Token utilisateur</Heading>
