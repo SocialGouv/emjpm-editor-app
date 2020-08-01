@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.7...v1.2.8) (2020-08-01)
+
+
+### Bug Fixes
+
+* **deps:** update emotion monorepo ([#33](https://github.com/SocialGouv/emjpm-editor-app/issues/33)) ([65743ef](https://github.com/SocialGouv/emjpm-editor-app/commit/65743ef30d46fd01a07d4814693a4dc89485b060))
+
 ## [1.2.7](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.6...v1.2.7) (2020-08-01)
 
 
