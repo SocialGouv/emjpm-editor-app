@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.6...v1.2.7) (2020-08-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency theme-ui to ^0.3.1 ([#31](https://github.com/SocialGouv/emjpm-editor-app/issues/31)) ([a4a4068](https://github.com/SocialGouv/emjpm-editor-app/commit/a4a4068a463bec805b64bdb8c2afd0ff91f5569f))
+
 ## [1.2.6](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.5...v1.2.6) (2020-07-31)
 
 
