@@ -1,3 +1,10 @@
+## [1.2.10](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.9...v1.2.10) (2020-08-01)
+
+
+### Bug Fixes
+
+* **deps:** update react monorepo to ^16.13.1 ([#34](https://github.com/SocialGouv/emjpm-editor-app/issues/34)) ([be389c9](https://github.com/SocialGouv/emjpm-editor-app/commit/be389c92a64ecf0904fb09025faf1b0d5aace4b1))
+
 ## [1.2.9](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.8...v1.2.9) (2020-08-01)
 
 
