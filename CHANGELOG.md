@@ -1,3 +1,10 @@
+## [1.2.13](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.12...v1.2.13) (2020-08-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @styled-icons/entypo to ^10.14.1 ([#43](https://github.com/SocialGouv/emjpm-editor-app/issues/43)) ([f71ca6e](https://github.com/SocialGouv/emjpm-editor-app/commit/f71ca6e0bf979912b20040266d22178fcf7f15fd))
+
 ## [1.2.12](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.11...v1.2.12) (2020-08-01)
 
 
