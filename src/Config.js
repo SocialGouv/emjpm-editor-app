@@ -11,7 +11,7 @@ function Config() {
     initialValues: {
       editorSecret: "53tes5gy1zk",
       editorId: "1",
-      redirectUrl: "https://emjpm-editor-demo.netlify.com/",
+      redirectUrl: "https://emjpm-editor-app.fabrique.social.gouv.fr",
       appUrl: APP_URL,
     },
     onSubmit: values => {
@@ -66,7 +66,7 @@ function Config() {
               id="redirectUrl"
               name="redirectUrl"
               type="text"
-              placeholder="Url de redirection (default: https://emjpm-editor-demo.netlify.com)"
+              placeholder="Url de redirection (default: https://emjpm-editor-app.fabrique.social.gouv.fr)"
               onChange={formik.handleChange}
               value={formik.values.redirectUrl}
             />
