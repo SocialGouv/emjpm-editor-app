@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.14...v1.3.0) (2020-08-03)
+
+
+### Features
+
+* **redirect-url:** use new url ([15f0fbf](https://github.com/SocialGouv/emjpm-editor-app/commit/15f0fbfddc3954aeb7eaccd7635c1de391d2af56))
+
 ## [1.2.14](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.2.13...v1.2.14) (2020-08-02)
 
 
