@@ -1,3 +1,10 @@
+## [1.3.9](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.3.8...v1.3.9) (2020-08-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency react-helmet to v6 ([#39](https://github.com/SocialGouv/emjpm-editor-app/issues/39)) ([b003a51](https://github.com/SocialGouv/emjpm-editor-app/commit/b003a51416a6471a68b62410f32c36dda6be05fb))
+
 ## [1.3.8](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.3.7...v1.3.8) (2020-08-11)
 
 
