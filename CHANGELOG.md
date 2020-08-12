@@ -1,3 +1,10 @@
+## [1.3.11](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.3.10...v1.3.11) (2020-08-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency react-scripts to v3.4.3 ([#60](https://github.com/SocialGouv/emjpm-editor-app/issues/60)) ([0f444ce](https://github.com/SocialGouv/emjpm-editor-app/commit/0f444ce57eb3f98553edfa38cb4f790597043b4b))
+
 ## [1.3.10](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.3.9...v1.3.10) (2020-08-11)
 
 
