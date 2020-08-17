@@ -1,3 +1,10 @@
+## [1.3.14](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.3.13...v1.3.14) (2020-08-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @emotion/core to ^10.0.34 ([#57](https://github.com/SocialGouv/emjpm-editor-app/issues/57)) ([7e906bf](https://github.com/SocialGouv/emjpm-editor-app/commit/7e906bf7bfb06ce8a5edc78b4b44915b7666927d))
+
 ## [1.3.13](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.3.12...v1.3.13) (2020-08-16)
 
 
