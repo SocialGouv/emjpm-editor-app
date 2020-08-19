@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.3.14...v1.4.0) (2020-08-19)
+
+
+### Features
+
+* **mesure:** create-mesure form ([#69](https://github.com/SocialGouv/emjpm-editor-app/issues/69)) ([df3f02a](https://github.com/SocialGouv/emjpm-editor-app/commit/df3f02afa42cb08191d72ef6129d7a1cb6bd24bf))
+
 ## [1.3.14](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.3.13...v1.3.14) (2020-08-17)
 
 
