@@ -1,6 +1,6 @@
 {
   "name": "emjpm-editor-app",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.34",

@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.3...v1.4.4) (2020-08-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @testing-library/jest-dom to ^5.11.4 ([#76](https://github.com/SocialGouv/emjpm-editor-app/issues/76)) ([f2f6c3a](https://github.com/SocialGouv/emjpm-editor-app/commit/f2f6c3a34160a8861f8df5dacd5bb6476b062353))
+
 ## [1.4.3](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.2...v1.4.3) (2020-08-22)
 
 
