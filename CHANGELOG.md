@@ -1,3 +1,10 @@
+## [1.4.5](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.4...v1.4.5) (2020-08-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @testing-library/user-event to ^12.1.2 ([#77](https://github.com/SocialGouv/emjpm-editor-app/issues/77)) ([e7861ff](https://github.com/SocialGouv/emjpm-editor-app/commit/e7861ff2837c78294c2c51b9e8ede5aaf9cb47eb))
+
 ## [1.4.4](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.3...v1.4.4) (2020-08-22)
 
 
