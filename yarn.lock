@@ -1758,10 +1758,10 @@
     "@styled-icons/styled-icon" "^9.4.1"
     tslib "^1.9.3"
 
-"@styled-icons/entypo@^10.15.1":
-  version "10.15.1"
-  resolved "https://registry.yarnpkg.com/@styled-icons/entypo/-/entypo-10.15.1.tgz#471f9bb0fb6b7418e7a65290c62ec410831bb535"
-  integrity sha512-gsiSbH9oFN72XaLii6ULvX4PfHAycDBS5TQUHw74nqXDIKvVxJ8XLCj0ZlEcs11GGE5qlTUYjJlV7QJ03rQeVA==
+"@styled-icons/entypo@^10.18.0":
+  version "10.18.0"
+  resolved "https://registry.yarnpkg.com/@styled-icons/entypo/-/entypo-10.18.0.tgz#9d98e8a432215257cca9f7383cae28ce388b6800"
+  integrity sha512-FZdYzBiqXgas/c76eeCSWfEy6jpzfvucIXMgwsTDQioh7/x9qVmuyz5TVlghx2zWmtoz4hEnLIDD0Yzw1ajXWQ==
   dependencies:
     "@babel/runtime" "^7.10.5"
     "@styled-icons/styled-icon" "^10.6.0"
