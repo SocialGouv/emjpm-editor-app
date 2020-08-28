@@ -3,14 +3,10 @@ import * as yup from 'yup';
 import { SquaredCross } from '@styled-icons/entypo/SquaredCross';
 import { useFormik, FieldArray, FormikProvider } from 'formik';
 import moment from 'moment';
-import {
-  Input,
-  Button,
-  Field,
-  InlineError,
-  Select,
-} from '@socialgouv/emjpm-ui-core';
+import { Input, Button, Field, InlineError } from '@socialgouv/emjpm-ui-core';
 import { Box, Heading, Flex, Card, Text } from 'rebass';
+
+import { Select } from './Select';
 
 import {
   API_URL,
@@ -128,7 +124,13 @@ function MesuresCreate(props) {
         if (!error && (res.status === 200 || res.status === 201)) {
           document.location.reload(true);
         } else {
-          if (error.includes('Siret')) {
+          Object.keys(payload).forEach((item) => {
+            if (error.toLowerCase().includes(item.toLowerCase())) {
+              setFieldError(item, error.msg);
+            }
+          });
+
+          if (error.toLowerCase().includes('siret')) {
             setFieldError(
               'tribunal_siret',
               "Le siret renseigné n'est pas valide"
