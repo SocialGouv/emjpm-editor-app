@@ -1,3 +1,10 @@
+## [1.4.15](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.14...v1.4.15) (2020-09-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @testing-library/react to ^11.0.3 ([#107](https://github.com/SocialGouv/emjpm-editor-app/issues/107)) ([081c533](https://github.com/SocialGouv/emjpm-editor-app/commit/081c533a713ccdcb1dd70f094db27e6022b356eb))
+
 ## [1.4.14](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.13...v1.4.14) (2020-09-13)
 
 
