@@ -19,7 +19,11 @@ export const TYPES_ETABLISSEMENT = [
     value: 'etablissement_handicapes',
   },
   {
-    label: 'Autre etablissement',
+    label: 'Etablissement pour personnes agées',
+    value: 'etablissement_personne_agee',
+  },
+  {
+    label: 'Autre établissement social ou médico-social',
     value: 'autre_etablissement_s_ms',
   },
   {
@@ -29,6 +33,10 @@ export const TYPES_ETABLISSEMENT = [
   {
     label: 'Etablissement psychiatrique',
     value: 'etablissement_psychiatrique',
+  },
+  {
+    label: 'Autre établissement',
+    value: 'autre_etablissement',
   },
 ];
 

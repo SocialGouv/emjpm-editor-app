@@ -1,16 +1,12 @@
 import React from 'react';
 import * as yup from 'yup';
 import { SquaredCross } from '@styled-icons/entypo/SquaredCross';
-import { useFormik, FieldArray, FormikProvider } from 'formik';
+import { useFormik, FieldArray, FormikProvider, ErrorMessage } from 'formik';
 import moment from 'moment';
-import {
-  Input,
-  Button,
-  Field,
-  InlineError,
-  Select,
-} from '@socialgouv/emjpm-ui-core';
+import { Input, Button, Field, InlineError } from '@socialgouv/emjpm-ui-core';
 import { Box, Heading, Flex, Card, Text } from 'rebass';
+
+import { Select } from './Select';
 
 import {
   API_URL,
@@ -70,6 +66,7 @@ function MesuresCreate(props) {
 
   const formik = useFormik({
     initialValues: {
+      general_error: '',
       numero_rg: '',
       numero_dossier: '',
       annee: '',
@@ -124,17 +121,21 @@ function MesuresCreate(props) {
           },
         });
 
-        const { error } = await res.json();
-        if (!error && (res.status === 200 || res.status === 201)) {
+        const { errors } = await res.json();
+        if (!errors && (res.status === 200 || res.status === 201)) {
           document.location.reload(true);
         } else {
-          if (error.includes('Siret')) {
-            setFieldError(
-              'tribunal_siret',
-              "Le siret renseigné n'est pas valide"
-            );
-          }
-          console.error(error);
+          errors.forEach((error) => {
+            if (error.msg.toLowerCase().includes('siret')) {
+              setFieldError(
+                'tribunal_siret',
+                "Le siret renseigné n'est pas valide"
+              );
+            } else {
+              setFieldError('general_error', error.msg);
+            }
+          });
+          console.error(errors);
         }
       } catch (err) {
         console.error(err.message);
@@ -760,6 +761,10 @@ function MesuresCreate(props) {
             </div>
           )}
         />
+
+        <Box sx={{ color: 'red', fontWeight: 'bold' }}>
+          <ErrorMessage name='general_error' />
+        </Box>
 
         <Flex justifyContent='flex-end' alignItems='center'>
           <Button
