@@ -1,3 +1,11 @@
+## [1.4.17](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.16...v1.4.17) (2020-09-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @socialgouv/kosko-charts to v2.7.1 ([#111](https://github.com/SocialGouv/emjpm-editor-app/issues/111)) ([0972024](https://github.com/SocialGouv/emjpm-editor-app/commit/0972024115b737a2626769e36210f4cf767c8041))
+* **deps:** update dependency swr to ^0.3.3 ([#92](https://github.com/SocialGouv/emjpm-editor-app/issues/92)) ([c80e2af](https://github.com/SocialGouv/emjpm-editor-app/commit/c80e2af7a865a4a193eb7b692d297d671e737551))
+
 ## [1.4.16](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.15...v1.4.16) (2020-09-13)
 
 
