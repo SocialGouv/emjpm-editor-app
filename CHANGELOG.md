@@ -1,3 +1,11 @@
+## [1.4.19](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.18...v1.4.19) (2020-09-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @emotion/core to ^10.0.35 ([#68](https://github.com/SocialGouv/emjpm-editor-app/issues/68)) ([73ce96b](https://github.com/SocialGouv/emjpm-editor-app/commit/73ce96b40df5edaaaf8b3f4b684f1743b5f33138))
+* **deps:** update dependency @testing-library/react to ^11.0.4 ([#108](https://github.com/SocialGouv/emjpm-editor-app/issues/108)) ([7553049](https://github.com/SocialGouv/emjpm-editor-app/commit/755304986cc49b3672a5f29c9b2036b919d40896))
+
 ## [1.4.18](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.17...v1.4.18) (2020-09-20)
 
 
