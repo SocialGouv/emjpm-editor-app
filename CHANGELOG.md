@@ -1,3 +1,10 @@
+## [1.4.20](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.19...v1.4.20) (2020-09-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency moment to ^2.29.0 ([#119](https://github.com/SocialGouv/emjpm-editor-app/issues/119)) ([f942a7d](https://github.com/SocialGouv/emjpm-editor-app/commit/f942a7d92fc896b38c7ad3832c3d7bc5a840f8cb))
+
 ## [1.4.19](https://github.com/SocialGouv/emjpm-editor-app/compare/v1.4.18...v1.4.19) (2020-09-22)
 
 
